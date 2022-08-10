@@ -11,13 +11,18 @@ function SignupForm() {
   const [validated, setValidated] = useState(false);
   const [ formData, setFormData ] = useState({first_name: '',last_name: '',email: '',address: '',card_num: '',card_name: '',cvv_code: '',cc_exp: '',cc_exp_year: '',})
 
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value })
+  }
+
   const handleSubmit = (event) => {
+    console.log(formData)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
-
+    event.preventDefault();
     setValidated(true);
   };
 
@@ -31,7 +36,9 @@ function SignupForm() {
             required
             type="text"
             name="first_name"
+            value={formData.first_name}
             placeholder="First name"
+            onChange={handleChange}
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
@@ -41,7 +48,9 @@ function SignupForm() {
             required
             type="text"
             name="last_name"
+            value={formData.last_name}
             placeholder="Last name"
+            onChange={handleChange}
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
@@ -53,8 +62,11 @@ function SignupForm() {
           <Form.Control 
           type="email" 
           name="email"
+          value={formData.email}
           placeholder="Email" 
-          required />
+          required 
+          onChange={handleChange}
+          />
           <Form.Control.Feedback type="invalid">Please provide a valid email.</Form.Control.Feedback>
           <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
         </Form.Group>
@@ -65,8 +77,11 @@ function SignupForm() {
           <Form.Control 
           type="text" 
           name="address"
+          value={formData.address}
           placeholder="Address" 
-          required />
+          required 
+          onChange={handleChange}
+          />
           <Form.Control.Feedback type="invalid">
             Please provide a valid Address.
           </Form.Control.Feedback>
@@ -79,10 +94,13 @@ function SignupForm() {
           <Form.Label>Credit Card Number</Form.Label>
           <Form.Control 
           type="text"
-          name="card_num" 
+          name="card_num"
+          value={formData.card_num} 
           placeholder="credit card number" 
           required 
-          pattern="[\d|]{16}" />
+          pattern="[\d|]{16}" 
+          onChange={handleChange}
+          />
           <Form.Control.Feedback type="invalid">
             Please provide a valid credit card number.
           </Form.Control.Feedback>
@@ -94,9 +112,10 @@ function SignupForm() {
           <Form.Control
             required
             name="card_name"
+            value={formData.card_name}
             type="text"
             placeholder="Name on card"
-            defaultValue=""
+            onChange={handleChange}
           />
         </Form.Group>
       </Row>
@@ -106,13 +125,17 @@ function SignupForm() {
           <Form.Control
             required
             type="text"
+            name="cc_exp"
+            value={formData.cc_exp}
             placeholder="MM/YYYY"
             pattern="[\d|/]{7}"
+            onChange={handleChange}
           />
         </Form.Group>
       </Row>
       <Button type="submit">Submit form</Button>
     </Form>
+    
     </div>
   );
 }
