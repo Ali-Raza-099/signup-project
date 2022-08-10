@@ -82,7 +82,7 @@ function SignupForm() {
           name="card_num" 
           placeholder="credit card number" 
           required 
-          pattern="[\d|-]{16}" />
+          pattern="[\d|]{16}" />
           <Form.Control.Feedback type="invalid">
             Please provide a valid credit card number.
           </Form.Control.Feedback>
@@ -105,9 +105,9 @@ function SignupForm() {
           <Form.Label >Expiry Date</Form.Label>
           <Form.Control
             required
-            type="date"
-            placeholder="Name on card"
-            defaultValue=""
+            type="text"
+            placeholder="MM/YYYY"
+            pattern="[\d|/]{7}"
           />
         </Form.Group>
       </Row>
